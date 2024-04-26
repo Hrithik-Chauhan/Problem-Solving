@@ -22,7 +22,7 @@ vector<int> dijkitras(int n,vector<vector<pair<int,int>>>& adj,int src)
                 if(distance[i.first]>d+i.second)
                 {
                    distance[i.first]=d+i.second;
-                   pq.push({di[i.first],i.first});
+                   pq.push({distance[i.first],i.first});
                 }
             }
         }
