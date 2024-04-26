@@ -4,29 +4,29 @@ using namespace std;
 vector<int> dijkitras(int n,vector<vector<pair<int,int>>>& adj,int src)
 {
         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
-        vector<int> di(n,1e7);
-        vector<int> vis(n, -1);
-        di[src]=0;
+        vector<int> distance(n,INT_MAX);
+        vector<bool> vis(n, 0);
+        distance[src]=0;
         pq.push({0,src});
         while(pq.size())
         {
-            auto it=pq.top();
+            auto i=pq.top();
             pq.pop();
-            int d=it.first;
-            int node=it.second;
-            if( vis[node]==1)
+            int d=i.first;
+            int temp=i.second;
+            if( vis[temp]==1)
                 continue;
-            vis[node] = 1;
-            for(auto itt:adj[node])
+            vis[temp] = 1;
+            for(auto i:adj[temp])
             {
-                if(di[itt.first]>d+itt.second)
+                if(distance[i.first]>d+i.second)
                 {
-                   di[itt.first]=d+itt.second;
-                   pq.push({di[itt.first],itt.first});
+                   distance[i.first]=d+i.second;
+                   pq.push({di[i.first],i.first});
                 }
             }
         }
-        return  di;
+        return  distance;
 }
     vector<bool> solve(int n, vector<vector<int>>& edges) {
         vector<vector<pair<int,int>>> adj(n);
